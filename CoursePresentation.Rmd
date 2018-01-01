@@ -1,0 +1,47 @@
+---
+title: "Developing Data Products Course Project"
+date: "1/1/2017"
+output: ioslides_presentation
+---
+
+
+## Introduction
+
+- This presentation is for the Developing Data Products course offered by Coursera.
+
+- The Shiny application can be found here: https://drbass89.shinyapps.io/dataproducts/
+
+- The source code is available here: https://github.com/datmuzik/DataProducts
+
+## Application
+
+The app developed allows you to select the number of bins used in building a histogram of the MPG variable in the mtcars dataset.
+
+## ui Code
+
+```{r ui code, eval=FALSE, echo=TRUE}
+ #Sidebar with a slider input for number of bins 
+  sidebarLayout(
+    sidebarPanel(
+      h3("Please select number of bins for MPG histogram"),
+      sliderInput("bins",
+                   "Number of bins:",
+                   min = 1,
+                   max = 50,
+                   value = 30)
+    ),
+```
+
+## Server Code
+
+The app takes the selected bin value and creates a histogram for MPG using the mtcars dataset:
+
+```{r cars, eval=FALSE, echo = TRUE}
+  x <- mtcars[, 1] 
+  bins <- seq(min(x), max(x), length.out = input$bins + 1)
+  
+  hist(x, breaks = bins, col = 'darkgray', border = 'white', main='Histogram of MPG')
+```
+
+
+
